@@ -19,14 +19,18 @@ export const patientSlice = createSlice({
     },
   },
 });
-export const getPatientAsync = (data) => async (dispatch) => {
+export const getPatientAsync = (data,hn) => async (dispatch) => {
   try {
-    const response = await axios.get(
+    const respatient = await axios.get(
       server.apiHisUrl + server.PATIENT_URL + `${data}`
     );
-    if (response.data.result === "") {
+    const resovst = await axios.get(
+      server.apiHisUrl+ server.OVST_URL+ `${hn}`
+    );
+    if (respatient.data.result === "") {
     } else {
-      dispatch(setPatientData(response.data));
+      dispatch(setPatientData(respatient.data));
+     // resovst()
     }
   } catch (err) {
     throw new Error(err);

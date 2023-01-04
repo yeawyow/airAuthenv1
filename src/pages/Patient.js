@@ -20,10 +20,11 @@ export default function Patient() {
   const cardId = useSelector((state) => state.mqttcon?.cardId);
   const cid = useSelector((state) => state.mqttcon?.cardId?.data?.cid);
   const patient = useSelector((state) => state.patient.patientData.result);
+  const hn =useSelector((state)=>state.patient?.patientData?.result?.Hn)
 
   /* const { data, error, isLoading, isSuccess, isFetching } =
     useGetAllAttractionsQuery(patientData.cid);*/
-  console.log(patient);
+  console.log(hn);
   const dispatch = useDispatch();
   if (cardId === null) {
     navigate("/");
@@ -32,7 +33,7 @@ export default function Patient() {
   useEffect(() => {
     if (cid) {
       dispatch(getTodoAsync());
-      dispatch(getPatientAsync(cid));
+      dispatch(getPatientAsync(cid,hn));
     }
     if (cardId === null) {
       navigate("/");

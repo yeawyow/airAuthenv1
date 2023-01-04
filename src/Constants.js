@@ -31,11 +31,10 @@ export const LOGIN_STATUS = "LOGIN_STATUS";
 export const server = {
   LOGIN_URL: `authen/login`,
   REGISTER_URL: `authen/register`,
-  PRODUCT_URL: `stock/product`,
-  TRANSACTION_URL: `transaction`,
-  REPORT_URL: `stock/report`,
+  OVST_URL:`getovst/`,
   LOGIN_PASSED: `yes`,
   PATIENT_URL: `getpatient/`,
+
   apiHisUrl: `http://localhost:8081/api/`,
 };
 
