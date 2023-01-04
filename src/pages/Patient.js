@@ -20,7 +20,7 @@ export default function Patient() {
   const cardId = useSelector((state) => state.mqttcon?.cardId);
   const cid = useSelector((state) => state.mqttcon?.cardId?.data?.cid);
   const patient = useSelector((state) => state.patient.patientData.result);
-  const hn =useSelector((state)=>state.patient?.patientData?.result?.Hn)
+  const hn = useSelector((state)=>state.patient?.patientData?.result?.Hn)
 
   /* const { data, error, isLoading, isSuccess, isFetching } =
     useGetAllAttractionsQuery(patientData.cid);*/
