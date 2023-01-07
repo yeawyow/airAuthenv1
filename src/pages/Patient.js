@@ -19,12 +19,11 @@ export default function Patient() {
   const person = useSelector((state) => state.nhsoPerson?.data);
   const cardId = useSelector((state) => state.mqttcon?.cardId);
   const cid = useSelector((state) => state.mqttcon?.cardId?.data?.cid);
-  const patient = useSelector((state) => state.patient.patientData.result);
-  const hn = useSelector((state)=>state.patient?.patientData?.result?.Hn)
+  const patient = useSelector((state) => state.patient.patientData);
 
   /* const { data, error, isLoading, isSuccess, isFetching } =
     useGetAllAttractionsQuery(patientData.cid);*/
-  console.log(hn);
+
   const dispatch = useDispatch();
   if (cardId === null) {
     navigate("/");
@@ -33,7 +32,7 @@ export default function Patient() {
   useEffect(() => {
     if (cid) {
       dispatch(getTodoAsync());
-      dispatch(getPatientAsync(cid,hn));
+      dispatch(getPatientAsync(cid));
     }
     if (cardId === null) {
       navigate("/");
@@ -116,7 +115,7 @@ export default function Patient() {
                   <TextField
                     id="outlined-read-only-input"
                     label="Read Only"
-                    defaultValue="Hello World"
+                    defaultValue={patient.Hometel}
                     InputProps={{
                       readOnly: true,
                     }}

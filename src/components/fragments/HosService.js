@@ -8,7 +8,8 @@ import { useNavigate } from "react-router-dom";
 import DepService from "./DepService";
 
 export default function HosService(props) {
-  const patient = useSelector((state) => state.patient.patientData.result);
+  const patient = useSelector((state) => state.patient.patientData.hn);
+
   const [swalProps, setSwalProps] = useState({});
   let navigate = useNavigate();
 
@@ -22,7 +23,7 @@ export default function HosService(props) {
         timer: 3000,
       });
     }
-  });
+  }, []);
   return (
     <div>
       {patient ? (
