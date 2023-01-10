@@ -27,7 +27,7 @@ export default function Patient() {
   const dispatch = useDispatch();
   if (cardId === null) {
     navigate("/");
-  }
+  }   
   //console.log(data);
   useEffect(() => {
     if (cid) {

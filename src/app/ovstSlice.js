@@ -3,7 +3,8 @@ import { server } from "../Constants";
 import axios from "axios";
 const initialState = {
   ovstData: {
-    vn: null,
+    vn: "",
+    hos_guid:""
   },
 };
 export const ovstSlice = createSlice({

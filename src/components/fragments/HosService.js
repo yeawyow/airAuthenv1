@@ -6,15 +6,30 @@ import { useDispatch, useSelector } from "react-redux";
 import SweetAlert2 from "react-sweetalert2";
 import { useNavigate } from "react-router-dom";
 import DepService from "./DepService";
+import { getOvstAsync } from "../../app/ovstSlice";
 
 export default function HosService(props) {
-  const patient = useSelector((state) => state.patient.patientData.hn);
+  const patient = useSelector((state) => state.patient.patientData);
+  const ovst = useSelector((state)=>(state.ovst.ovstData))
 
   const [swalProps, setSwalProps] = useState({});
   let navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  console.log(ovst)
   useEffect(() => {
-    if (patient) {
+    if (patient.hn) {
+      dispatch(getOvstAsync(patient.hn));
+      if(ovst.vn ===""){
+        setSwalProps({
+          show: true,
+          title: "ไม่พบข้อมูลของท่าน",
+          text: "กรุณาติดต่อห้องบัตร",
+          timer: 3000,
+        });
+   console.log("555")
+      }else{
+        console.log("666")
+      }
     } else {
       setSwalProps({
         show: true,
@@ -26,7 +41,7 @@ export default function HosService(props) {
   }, []);
   return (
     <div>
-      {patient ? (
+      {patient.hn ? (
         <Paper
           variant="none"
           sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}
