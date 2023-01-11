@@ -34,7 +34,7 @@ function App() {
           <ThemeProvider theme={theme}>
             <Router>
               <MQTTConnect />
-              <Toolbar variant="dense" />
+              {/*}  <Toolbar variant="dense" />{*/}
 
               <Routes>
                 <Route path="/" element={<IdCard />}></Route>

@@ -2,10 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { server } from "../Constants";
 import axios from "axios";
 const initialState = {
-  ovstData: {
-    vn: "",
-    hos_guid:""
-  },
+  ovstData: [],
 };
 export const ovstSlice = createSlice({
   name: "ovst",

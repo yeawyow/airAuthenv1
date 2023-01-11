@@ -10,32 +10,30 @@ import { getOvstAsync } from "../../app/ovstSlice";
 
 export default function HosService(props) {
   const patient = useSelector((state) => state.patient.patientData);
-  const ovst = useSelector((state)=>(state.ovst.ovstData))
+  const ovst = useSelector((state) => state.ovst.ovstData);
 
   const [swalProps, setSwalProps] = useState({});
+
   let navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(ovst)
+  console.log(ovst);
   useEffect(() => {
     if (patient.hn) {
       dispatch(getOvstAsync(patient.hn));
-      if(ovst.vn ===""){
+      if (ovst.vn === "") {
         setSwalProps({
           show: true,
-          title: "ไม่พบข้อมูลของท่าน",
+          title: "ท่านยังไม่เปิดการบริการภายในวัน",
           text: "กรุณาติดต่อห้องบัตร",
-          timer: 3000,
+          timer: 5000,
         });
-   console.log("555")
-      }else{
-        console.log("666")
       }
     } else {
       setSwalProps({
         show: true,
         title: "ไม่พบข้อมูลของท่าน",
         text: "กรุณาติดต่อห้องบัตร",
-        timer: 3000,
+        timer: 5000,
       });
     }
   }, []);
@@ -54,28 +52,27 @@ export default function HosService(props) {
           </Grid>
         </Paper>
       ) : (
-        <>
-          <SweetAlert2
-            {...swalProps}
-            didOpen={() => {
-              // run when swal is opened...
-            }}
-            didClose={() => {
-              navigate("/");
-              // run when swal is closed...
-            }}
-            onConfirm={(result) => {
-              // run when clieked in confirm and promise is resolved...
-            }}
-            onError={(error) => {
-              // run when promise rejected...
-            }}
-            onResolve={(result) => {
-              // run when promise is resolved...
-            }}
-          />
-        </>
+        <></>
       )}
+      <SweetAlert2
+        {...swalProps}
+        didOpen={() => {
+          // run when swal is opened...
+        }}
+        didClose={() => {
+          navigate("/");
+          // run when swal is closed...
+        }}
+        onConfirm={(result) => {
+          // run when clieked in confirm and promise is resolved...
+        }}
+        onError={(error) => {
+          // run when promise rejected...
+        }}
+        onResolve={(result) => {
+          // run when promise is resolved...
+        }}
+      />
     </div>
   );
 }
