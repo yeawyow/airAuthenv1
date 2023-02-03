@@ -20,7 +20,7 @@ export default function HosService(props) {
   useEffect(() => {
     if (patient.hn) {
       dispatch(getOvstAsync(patient.hn));
-      if (ovst.vn === "") {
+      if (ovst.vn === " ") {
         setSwalProps({
           show: true,
           title: "ท่านยังไม่เปิดการบริการภายในวัน",
