@@ -8,6 +8,7 @@ const initialState = {
     lname: null,
     cid: null,
     hometel: null,
+    hcode: null,
   },
 };
 export const patientSlice = createSlice({

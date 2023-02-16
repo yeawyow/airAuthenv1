@@ -40,7 +40,7 @@ export default function ManualCid() {
   const dispatch = useDispatch();
   function handleClick() {
     dispatch(getPatientAsync(cid.join("")));
-    //console.log(cid.join(""));
+    console.log(cid.join(""));
   }
   useEffect(() => {
     // Update the document title using the browser API

@@ -19,15 +19,6 @@ export default function HosService(props) {
   console.log(ovst);
   useEffect(() => {
     if (patient.hn) {
-      dispatch(getOvstAsync(patient.hn));
-      if (ovst.vn === " ") {
-        setSwalProps({
-          show: true,
-          title: "ท่านยังไม่เปิดการบริการภายในวัน",
-          text: "กรุณาติดต่อห้องบัตร",
-          timer: 5000,
-        });
-      }
     } else {
       setSwalProps({
         show: true,

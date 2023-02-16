@@ -27,5 +27,14 @@ export const getTodoAsync = (data) => async (dispatch) => {
     throw new Error(err);
   }
 };
+export const postNhsoAuthen = () => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      `http://localhost:8189/api/nhso-service/confirm-save`
+    );
+  } catch (err) {
+    throw new Error(err);
+  }
+};
 export const { getPerson, removePerson } = nhsoSlide.actions;
 export default nhsoSlide.reducer;
