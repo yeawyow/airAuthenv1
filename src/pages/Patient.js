@@ -10,13 +10,20 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getTodoAsync } from "../app/nhsoSlice";
+import {
+  getTodoAsync,
+  getNhsoPerson,
+  selectNhsoPerson,
+} from "../app/nhsoSlice";
 import { getPatientAsync } from "../app/patientSlice";
 import HosService from "../components/fragments/HosService";
+import { getAuthenAsync } from "../app/nhsoAuthenSlice";
 
 export default function Patient() {
   let navigate = useNavigate();
-  const person = useSelector((state) => state.nhsoPerson?.data);
+  const person = useSelector((state) => state.nhsoPerson.data);
+  const personIsloading = useSelector((state) => state.nhsoPerson.isLoading);
+  //const person = useSelector(selectNhsoPerson);
   const cardId = useSelector((state) => state.mqttcon?.cardId);
   const cid = useSelector((state) => state.mqttcon?.cardId?.data?.cid);
   const patient = useSelector((state) => state.patient.patientData);
@@ -27,12 +34,15 @@ export default function Patient() {
   const dispatch = useDispatch();
   if (cardId === null) {
     navigate("/");
-  }   
-  //console.log(data);
+  }
+
   useEffect(() => {
     if (cid) {
-      dispatch(getTodoAsync());
-      dispatch(getPatientAsync(cid));
+      //dispatch(getTodoAsync());
+      dispatch(getNhsoPerson());
+      // dispatch(getPatientAsync(cid));
+      // dispatch(getAuthenAsync(cid));
+      console.log(personIsloading);
     }
     if (cardId === null) {
       navigate("/");
@@ -41,91 +51,101 @@ export default function Patient() {
 
   return (
     <div>
-      {person
-        ? person?.map((person) => {
-            return (
-              <>
-                <Container component="main" maxWidth="lg" sx={{ mb: 4 }}>
-                  <Paper
-                    variant="outlined"
-                    sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}
-                  >
-                    <Stack direction="row" alignItems="center" gap={1}></Stack>
+      {personIsloading ? (
+        <h1>กำลังอ่านข้อมูล</h1>
+      ) : (
+        <>
+          <h2>เสร็จแล้ว</h2>
+          {person ? (
+            // person?.map((person) => {
+            // return (
+            <>
+              <Container component="main" maxWidth="lg" sx={{ mb: 4 }}>
+                <Paper
+                  variant="outlined"
+                  sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}
+                >
+                  <Stack direction="row" alignItems="center" gap={1}></Stack>
 
-                    <Grid container spacing={12}>
-                      <Grid item xs={2} sm={3}>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            "& > :not(style)": {
-                              // m: 1,
-                              width: 300,
-                              height: 200,
-                            },
-                          }}
-                        >
-                          <img src={`data:image/jpeg;base64,${person.image}`} />
-                          <Paper variant="outlined" />
-                        </Box>
-                      </Grid>
-                      <Grid item sm={8}>
-                        <Box>
-                          <Stack direction="row" alignItems="center" gap={1}>
-                            <Typography variant="h5">pid:</Typography>
-                            <Typography variant="h5">{person.pid}</Typography>
-                          </Stack>
-                        </Box>
-                        <Box>
-                          <Stack direction="row" alignItems="center" gap={1}>
-                            <Typography variant="h3">
-                              {person.fname} {person.lname}
-                            </Typography>
-                          </Stack>
-                        </Box>
-
-                        <Box>
-                          <Stack direction="row" alignItems="center" gap={1}>
-                            <Typography variant="h5">สิทธิหลัก:</Typography>
-                            <Typography variant="h5">
-                              {person.mainInscl}
-                            </Typography>
-                          </Stack>
-                        </Box>
-                        <Box>
-                          <Stack direction="row" alignItems="center" gap={1}>
-                            <Typography variant="h5">สิทธิรอง:</Typography>
-                            <Typography variant="h5">
-                              {person.subInscl}
-                            </Typography>
-                          </Stack>
-                        </Box>
-
-                        <Box>
-                          <Stack direction="row" alignItems="center" gap={1}>
-                            <Typography variant="h5">อายุ:</Typography>
-                            <Typography variant="h5">{person.age}</Typography>
-                          </Stack>
-                        </Box>
-                      </Grid>
+                  <Grid container spacing={12}>
+                    <Grid item xs={2} sm={3}>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          "& > :not(style)": {
+                            // m: 1,
+                            width: 300,
+                            height: 200,
+                          },
+                        }}
+                      >
+                        <img src={`data:image/jpeg;base64,${person.image}`} />
+                        <Paper variant="outlined" />
+                      </Box>
                     </Grid>
-                  </Paper>
-                </Container>
+                    <Grid item sm={8}>
+                      <Box>
+                        <Stack direction="row" alignItems="center" gap={1}>
+                          <Typography variant="h5">pid:</Typography>
+                          <Typography variant="h5">{person.pid}</Typography>
+                        </Stack>
+                      </Box>
+                      <Box>
+                        <Stack direction="row" alignItems="center" gap={1}>
+                          <Typography variant="h3">
+                            {person.fname} {person.lname}
+                          </Typography>
+                        </Stack>
+                      </Box>
 
-                <Container component="main" maxWidth="lg" sx={{ mb: 4 }}>
-                  <TextField
-                    id="outlined-read-only-input"
-                    label="Read Only"
-                    defaultValue={patient.Hometel}
-                    InputProps={{
-                      readOnly: true,
-                    }}
-                  />
-                  <HosService />
-                </Container>
-              </>
-            );
-          })
-        : navigate("/")}
+                      <Box>
+                        <Stack direction="row" alignItems="center" gap={1}>
+                          <Typography variant="h5">สิทธิหลัก:</Typography>
+                          <Typography variant="h5">
+                            {person.mainInscl}
+                          </Typography>
+                        </Stack>
+                      </Box>
+                      <Box>
+                        <Stack direction="row" alignItems="center" gap={1}>
+                          <Typography variant="h5">สิทธิรอง:</Typography>
+                          <Typography variant="h5">
+                            {person.subInscl}
+                          </Typography>
+                        </Stack>
+                      </Box>
+
+                      <Box>
+                        <Stack direction="row" alignItems="center" gap={1}>
+                          <Typography variant="h5">อายุ:</Typography>
+                          <Typography variant="h5">{person.age}</Typography>
+                        </Stack>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Paper>
+              </Container>
+
+              <Container component="main" maxWidth="lg" sx={{ mb: 4 }}>
+                <TextField
+                  id="outlined-read-only-input"
+                  label="Read Only"
+                  defaultValue={patient.Hometel}
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                />
+                {/*} <HosService />{*/}
+              </Container>
+            </>
+          ) : (
+            //  );
+            //  }
+            //  )
+            navigate("/")
+          )}
+        </>
+      )}
     </div>
   );
 }

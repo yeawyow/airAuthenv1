@@ -18,7 +18,7 @@ export const STOCK_EDIT_INITIALED = "STOCK_EDIT_INITIALED";
 
 //export const apiHisUrl = "http://localhost:8081/api/";
 export const apiMqttUrl = "ws://localhost:10884";
-export const smartcardAgent = "http://localhost:8189";
+
 export const soapNhso =
   "http://ucws.nhso.go.th:80/ucwstokenp1/UCWSTokenP1?wsdl";
 export const YES = "YES";
@@ -31,10 +31,11 @@ export const LOGIN_STATUS = "LOGIN_STATUS";
 export const server = {
   LOGIN_URL: `authen/login`,
   REGISTER_URL: `authen/register`,
-  OVST_URL:`getovst/`,
-  LOGIN_PASSED: `yes`,
+  OVST_URL: `getovst/`,
   PATIENT_URL: `getpatient/`,
-
+  LastAuthen: `nhso-service/latest-authen-code/`,
+  Smartcard: `smartcard/read?readImageFlag=true`,
+  ApismartcardAgent: `http://localhost:8189/api/`,
   apiHisUrl: `http://localhost:8081/api/`,
 };
 

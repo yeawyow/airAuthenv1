@@ -58,6 +58,7 @@ const HookMqtt = () => {
       if (cardData?.status === "DATA_RETRIEVED") {
         dispatch(setCardId(cardData));
         dispatch(setcardStatus(cardData.status));
+
         //  dispatch(setPatientData({ ...patientData, cid: cardData?.data?.cid }));
       } else if (cardData?.status === "IMAGE_RETRIEVED") {
         dispatch(setcardImage(cardData?.data));
