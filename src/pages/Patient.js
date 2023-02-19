@@ -10,14 +10,11 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  getTodoAsync,
-  getNhsoPerson,
-  selectNhsoPerson,
-} from "../app/nhsoSlice";
+import { getNhsoPerson } from "../app/nhsoSlice";
 import { getPatientAsync } from "../app/patientSlice";
 import HosService from "../components/fragments/HosService";
 import { getAuthenAsync } from "../app/nhsoAuthenSlice";
+import CheckPatientTell from "../components/fragments/CheckPatientTell";
 
 export default function Patient() {
   let navigate = useNavigate();
@@ -36,13 +33,15 @@ export default function Patient() {
     navigate("/");
   }
 
+  async function checkPerson() {
+    dispatch(getNhsoPerson());
+    await dispatch(getPatientAsync(cid));
+    // await dispatch(getAuthenAsync(cid));
+  }
   useEffect(() => {
     if (cid) {
+      checkPerson();
       //dispatch(getTodoAsync());
-      dispatch(getNhsoPerson());
-      // dispatch(getPatientAsync(cid));
-      // dispatch(getAuthenAsync(cid));
-      console.log(personIsloading);
     }
     if (cardId === null) {
       navigate("/");
@@ -127,15 +126,8 @@ export default function Patient() {
               </Container>
 
               <Container component="main" maxWidth="lg" sx={{ mb: 4 }}>
-                <TextField
-                  id="outlined-read-only-input"
-                  label="Read Only"
-                  defaultValue={patient.Hometel}
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                />
                 {/*} <HosService />{*/}
+                <CheckPatientTell Hometel={patient.Hometel} />
               </Container>
             </>
           ) : (

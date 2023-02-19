@@ -8,7 +8,6 @@ import { Typography, Toolbar } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setPatientData } from "../../app/patientSlice";
-import { withSwal } from "react-sweetalert2";
 import { getPatientAsync } from "../../app/patientSlice";
 
 const useStyles = makeStyles((theme) => ({

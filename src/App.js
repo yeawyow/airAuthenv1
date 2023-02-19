@@ -9,29 +9,27 @@ import ManualCid from "./components/fragments/ManualCid";
 import Patient from "./pages/Patient";
 import MQTTConnect from "./components/MQTT_Connector/Connection";
 import NumberPhone from "./pages/NumberPhone";
+import Box from "@mui/material/Box";
 
 const theme = createTheme({
   typography: {
     fontFamily: "Noto Serif Thai, serif",
   },
   palette: {
-    primary: {
-      main: "#00796b",
-    },
-    secondary: {
-      main: "#ff9100",
+    background: {
+      default: "#22222",
     },
   },
 });
 function App() {
   return (
     <div>
-      <Grid spacing={3}>
-        <Grid item xs={12}>
-          <Logo />
-        </Grid>
-        <Grid item xs={12}>
-          <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <Grid spacing={3}>
+          <Grid item xs={12}>
+            <Logo />
+          </Grid>
+          <Grid item xs={12}>
             <Router>
               <MQTTConnect />
               {/*}  <Toolbar variant="dense" />{*/}
@@ -43,9 +41,9 @@ function App() {
                 <Route path="/ptphone" element={<NumberPhone />}></Route>
               </Routes>
             </Router>
-          </ThemeProvider>
+          </Grid>
         </Grid>
-      </Grid>
+      </ThemeProvider>
     </div>
   );
 }
