@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import React, { useState } from "react";
 
 export default function Datetime() {
@@ -39,8 +40,9 @@ export default function Datetime() {
   return (
     <div>
       <>
-        <p> {result}</p>
-        <p>เวลา {ctime}</p>
+        <Typography>
+          {result} เวลา {ctime}
+        </Typography>
 
         {/*} <p>VN: {vn}</p>
         <p>vstdate:{vstdate}</p>{*/}

@@ -15,34 +15,32 @@ const theme = createTheme({
   typography: {
     fontFamily: "Noto Serif Thai, serif",
   },
-  palette: {
-    background: {
-      default: "#22222",
-    },
-  },
+  palette: {},
 });
 function App() {
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <Grid spacing={3}>
-          <Grid item xs={12}>
-            <Logo />
-          </Grid>
-          <Grid item xs={12}>
-            <Router>
-              <MQTTConnect />
-              {/*}  <Toolbar variant="dense" />{*/}
+        <Box>
+          <Grid spacing={3}>
+            <Grid item xs={12}>
+              <Logo />
+            </Grid>
+            <Grid item xs={12}>
+              <Router>
+                <MQTTConnect />
+                {/*}  <Toolbar variant="dense" />{*/}
 
-              <Routes>
-                <Route path="/" element={<IdCard />}></Route>
-                <Route path="/number" element={<ManualCid />}></Route>
-                <Route path="/patient" element={<Patient />}></Route>
-                <Route path="/ptphone" element={<NumberPhone />}></Route>
-              </Routes>
-            </Router>
+                <Routes>
+                  <Route path="/" element={<IdCard />}></Route>
+                  <Route path="/number" element={<ManualCid />}></Route>
+                  <Route path="/patient" element={<Patient />}></Route>
+                  <Route path="/ptphone" element={<NumberPhone />}></Route>
+                </Routes>
+              </Router>
+            </Grid>
           </Grid>
-        </Grid>
+        </Box>
       </ThemeProvider>
     </div>
   );

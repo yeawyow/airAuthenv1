@@ -17,9 +17,6 @@ export default function Logo() {
         </Grid>
         <Grid item>
           <Typography variant="h2">โรงพยาบาลอากาศอำนวย</Typography>
-          <Typography variant="h4">
-            ระบบ ขอ Authen code คลิกนิกโรงเรื้อรัง
-          </Typography>
           <Datetime />
         </Grid>
       </Grid>
